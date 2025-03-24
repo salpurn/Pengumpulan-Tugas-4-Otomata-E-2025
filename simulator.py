@@ -27,11 +27,25 @@ def simulate_dfa(dfa):
     print("Path:", " → ".join(path))
     print("Status:", status)
 
-# Read DFA from external JSON file
-def loadexternaldata(file_path):
-    with open(file_path, "r") as file:
-        return json.load(file)
+# Read multiple DFA configurations from external JSON files
+def load_external_data(*file_paths):
+    dfas = []
+    for file_path in file_paths:
+        with open(file_path, "r") as file:
+            dfas.append(json.load(file))
+    return dfas
 
 # Example usage
-dfa = loadexternaldata("testcase3.json")
-simulate_dfa(dfa)
+dfa_list = load_external_data("testcase1.json", "testcase2.json", "testcase3.json")
+for dfa in dfa_list:
+    simulate_dfa(dfa)
+    print()
+
+#Read DFA from singular external JSON file
+#def loadexternaldata(file_path):
+#    with open(file_path, "r") as file:
+#        return json.load(file)
+
+#Example usage
+#dfa = loadexternaldata("testcase1.json")
+#simulate_dfa(dfa)
